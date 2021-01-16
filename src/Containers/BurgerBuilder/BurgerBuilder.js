@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import Aux from '../../HOC/Aux'
 import Burger from '../../Components/Burger/Burger'
 import Controller from '../../Components/Burger/BuildControls/BuildControls'
-import bContext from '../../Context/ControllerContext'
+import BurgerContext from '../../Context/ControllerContext'
+import Modal from '../../Components/UI/Modal/Modal'
+import OrderContext from '../../Context/OrderSummaryContext'
+import OrderSummary from '../../Components/Burger/BuildControls/OrderSummary/OrderSummary'
 
 const IngPrice = {
     Salad: 0.5,
@@ -23,6 +26,7 @@ class BurgerBuilder extends Component {
         },
         Price: 4,
         canOrder: false,
+        clicked: false,
     }
 
     changeCanOrder = (ing) => {
@@ -70,6 +74,25 @@ class BurgerBuilder extends Component {
         }
     }
 
+    buy = () =>{
+        this.setState({
+            clicked: true,
+        });
+    }
+
+    hide = () =>{
+        this.setState({
+            clicked: false,
+        });
+    }
+
+    continue = () =>{
+        this.setState({
+            clicked: false,
+        });
+        alert("Successfully Purchased");
+    }
+
     render() {
 
         const disabled = {
@@ -82,16 +105,28 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
+            <OrderContext.Provider value={
+                {
+                    ingredients: this.state.ingredients,
+                    cancel: this.hide,
+                    continue: this.continue,
+                    price: this.state.Price.toFixed(2),
+                }
+            }>
+            <Modal show={this.state.clicked}>
+            <OrderSummary show={this.state.clicked}/>
+            </Modal>
+            </OrderContext.Provider>
                 <Burger ingredients={this.state.ingredients} />
-                <bContext.Provider value={
+                <BurgerContext.Provider value={
                     {
                         add: this.add,
                         remove: this.sub,
                         disabled: disabled,
                     }
                 } >
-                    <Controller Price={this.state.Price} canOrder={this.state.canOrder} />
-                </bContext.Provider >
+                    <Controller Price={this.state.Price} canOrder={this.state.canOrder} clicked = {this.buy}/>
+                </BurgerContext.Provider >
             </Aux>
         );
     }

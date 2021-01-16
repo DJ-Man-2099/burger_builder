@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
- 
-const Wrapper = (props) => {
+ const Wrapper = (props) => {
     return props.children;
 }
  

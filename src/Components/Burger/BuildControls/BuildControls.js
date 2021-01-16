@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classes from './BuildControls.module.css'
 import Control from './Control/Control'
 
@@ -18,7 +18,7 @@ const Controls = (props) => {
         {Conts.map(
             value => <Control key={value.type} label={value.type} />
         )}
-        <button className={classes.OrderButton} disabled={!props.canOrder}>Order NOW !!!</button>
+        <button className={classes.OrderButton} disabled={!props.canOrder} onClick={props.clicked}>Order NOW !!!</button>
         </div>
     );
 }
