@@ -1,24 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import IngContext from '../../../../Context/OrderSummaryContext';
-import Aux from '../../../../HOC/Aux';
+import Aux from '../../../../HOC/Aux/Aux';
 import Button from '../../../UI/Button/Button';
  
 const OrderSummary = (props) => {
-
-    const ingredients = useContext(IngContext);
     
-    useEffect(() => {
-        console.log('[order summary] is updated')
-    },[props.show]);
+    //IMPORTANT: Using "useContext" or "useEffect" will trigger a re-render if changed,
+    //even if React.memo is used with checking
+    const ingredients = useContext(IngContext);
 
     const ingSumm = Object.keys(ingredients.ingredients).map(
         ing => {
-            if (ingredients.ingredients[ing]!==0) {
+            if (ingredients.ingredients[ing].quantity!==0) {
               return (<li key={ing}>
                 <span style={{
                 textTransform: 'capitalize'
             }}>{ing}</span>
-            : {ingredients.ingredients[ing]}</li>);  
+            : {ingredients.ingredients[ing].quantity}</li>);  
             }
             return null;
         }
@@ -39,5 +37,7 @@ const OrderSummary = (props) => {
         </Aux>
     );
 }
- 
-export default OrderSummary
+
+const check=(prev, next)=>prev.show===next.show
+
+export default React.memo(OrderSummary,check)

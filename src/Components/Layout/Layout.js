@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Wrapper from '../../HOC/Aux'
+import Wrapper from '../../HOC/Aux/Aux'
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import ToolBar from '../Navigation/ToolBar/ToolBar';
 import classes from './Layout.module.css'

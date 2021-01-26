@@ -1,15 +1,10 @@
-import React, {useContext, useEffect} from 'react';
+import React from 'react';
 import classes from './Modal.module.css'
-import Aux from '../../../HOC/Aux'
+import Aux from '../../../HOC/Aux/Aux'
 import BackDrop from '../BackDrop/BackDrop';
-import OrderContext from '../../../Context/OrderSummaryContext'
  
 const Modal = (props) => {
-    const context = useContext(OrderContext).cancel;
-
-    useEffect(() => {
-        console.log("[modal] is updated");
-    },[props.show]);
+    const context = props.onClick;
 
     return (
         <Aux>
@@ -23,5 +18,9 @@ const Modal = (props) => {
         </Aux>
     );
 }
- 
-export default Modal
+const check=(prev, next)=> {
+    return prev.show===next.show && prev.children ===next.children
+}
+
+export default React.memo(Modal,check)
+

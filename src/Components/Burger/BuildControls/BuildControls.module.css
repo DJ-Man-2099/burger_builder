@@ -2,12 +2,14 @@
     width: 100%;
     background-color: rgb(76, 76, 252);
     display: flex;
+    position: absolute;
     flex-flow: column;
     align-items: center;
     box-shadow: 0 2px 1px #cccccc;
     margin: auto;
     padding: 10px 0;
     bottom: 0vh;
+    left: 0;
 }
 
 

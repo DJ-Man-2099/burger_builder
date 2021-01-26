@@ -1,13 +1,15 @@
 import React from 'react';
 import classes from './Burger.module.css'
 import Ingredient from './Ingredients/Ingredients'
+import ErrorHandler from '../../HOC/ErrorHandler/ErrorHandler'
+import axios from '../../BackEnd/BackEnd'
 
 const Burger = (props) => {
 
     let Fillings = Object.keys(props.ingredients).map(
         inge => {
             let t = [];
-            for (let index = 0; index < props.ingredients[inge]; index++) {
+            for (let index = 0; index < props.ingredients[inge].quantity; index++) {
                 t.push(<Ingredient key={inge + index} type={inge} />);
             }
             return t;
@@ -27,4 +29,4 @@ const Burger = (props) => {
     );
 }
 
-export default Burger
+export default ErrorHandler(Burger,axios)

@@ -3,6 +3,10 @@ body {
   font-family: 'Potta One';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  height: fit-content;
+  min-height: fit-content;
+  max-height: fit-content;
 }
 
 code {
